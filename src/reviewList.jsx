@@ -1,17 +1,23 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 function ReviewList(review_id){
 const [reviews, setReviews] = useState([])
-    fetch('https://jamies-backend-project.onrender.com/api/reviews')
+const [isLoading, setIsLoading] = useState(true)
+   
+useEffect(()=>{
+    setIsLoading(true)
+fetch('https://jamies-backend-project.onrender.com/api/reviews')
     .then((response)=> response.json())
     .then((data)=> {
-      setReviews(data)}
-    )
+      setReviews(data)
+      setIsLoading(false)}
+    )}, [])
 
+    if(isLoading)
+    { return <h2>Loading Reviews ...</h2>}
     return(
         <main>
             <ul>
                 {reviews.map((review)=>{
-                    console.log(review.review_id)
                     return(
                         <li key={review_id}>
                             <p>{review.owner}</p>
