@@ -7,6 +7,7 @@ function SingleReview(){
    
     const [singleReview, setSingleReview] = useState([])
 const [isLoading, setIsLoading] = useState(true)    
+const [votes, setVotes] = useState
 const {review_id} = useParams()
 useEffect(()=>{
     setIsLoading(true)
@@ -25,6 +26,7 @@ useEffect(()=>{
             <p>{singleReview.title}</p>
             <img src={singleReview.review_img_url} alt='Not found' ></img>
                             <p>Votes : {singleReview.votes}</p>
+                            <AddReviewVotes votes={votes} setVotes={setVotes}/>
         </main>
     )
 }

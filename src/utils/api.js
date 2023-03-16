@@ -17,3 +17,15 @@ export const getReviewById = (review_id) => {
     return data;
   });
 };
+
+export const voteForReview = () => {
+  let path = `/reviews/${review_id}`;
+  return (
+    reviewsApi.patch(path),
+    {
+      votes: 1,
+    }.then(({ data }) => {
+      return data;
+    })
+  );
+};
