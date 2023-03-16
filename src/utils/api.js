@@ -29,3 +29,10 @@ export const voteForReview = () => {
     })
   );
 };
+
+export const getCommentsByReview = (review_id) => {
+  let path = `/reviews/${review_id}/comments`;
+  return reviewsApi.get(path).then(({ data }) => {
+    return data;
+  });
+};
