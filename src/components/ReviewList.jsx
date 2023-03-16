@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
-import getReviews from "../utils/api.js"
+import { useState, useEffect  } from "react"
+import { Link } from "react-router-dom"
+import {getReviews} from "../utils/api.js"
 
 function ReviewList(){
 const [reviews, setReviews] = useState([])
@@ -22,9 +23,12 @@ useEffect(()=>{
                     return(
                         <li key={review.review_id}>
                             <p>{review.owner}</p>
+                            <Link to={`/reviews/${review.review_id}`}>
                             <p>{review.title}</p>
+                        </Link>
                             <img src={review.review_img_url} alt='Not found' ></img>
                             <p>Votes : {review.votes}</p>
+                        
                         </li>
                     )
                 })}

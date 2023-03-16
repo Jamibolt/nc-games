@@ -1,7 +1,19 @@
-function getReviews() {
-  return fetch("https://jamies-backend-project.onrender.com/api/reviews").then(
-    (response) => response.json()
-  );
-}
+import axios from "axios";
 
-export default getReviews;
+const reviewsApi = axios.create({
+  baseURL: "https://jamies-backend-project.onrender.com/api",
+});
+
+export const getReviews = () => {
+  let path = `/reviews`;
+  return reviewsApi.get(path).then(({ data }) => {
+    return data;
+  });
+};
+
+export const getReviewById = (review_id) => {
+  let path = `/reviews/${review_id}`;
+  return reviewsApi.get(path).then(({ data }) => {
+    return data;
+  });
+};
