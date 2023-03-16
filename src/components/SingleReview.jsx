@@ -33,7 +33,9 @@ useEffect(()=>{
             <p>{singleReview.review_body}</p>
             <img src={singleReview.review_img_url} alt='Not found' ></img>
                             <p>Votes : {singleReview.votes}</p>
-            <p>Comments</p>
+            <p>{(comments.length === 0) ?
+            'No comments' :
+            'Comments'}</p>
                             {comments.map((comment)=>{
                             return(
                             <CommentCard comments={comment} />)
