@@ -24,3 +24,15 @@ export const getCommentsByReview = (review_id) => {
     return data;
   });
 };
+
+export const voteForReview = (review_id, votes) => {
+  let path = `/reviews/${review_id}`;
+  return reviewsApi
+    .patch(path, {
+      inc_votes: 1,
+    })
+    .then(({ data }) => {
+      console.log(data);
+      return data;
+    });
+};
