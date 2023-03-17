@@ -1,14 +1,14 @@
-import {getCommentsByReview, getReviewById} from '../utils/api.js'
+import {getCommentsByReview, getReviewById,} from '../utils/api.js'
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import CommentCard from './CommentCard'
+import AddReviewVotes from './AddReviewVotes'
 
 
 function SingleReview(){
    
     const [singleReview, setSingleReview] = useState([])
 const [isLoading, setIsLoading] = useState(true)    
-const [votes, setVotes] = useState
 const [comments, setComments] = useState([])  
 const {review_id} = useParams()
 useEffect(()=>{
@@ -21,6 +21,7 @@ useEffect(()=>{
     getCommentsByReview(review_id).then((commentData)=>{
         setComments(commentData)
     })
+
 }, [review_id])
 
 
@@ -34,7 +35,7 @@ useEffect(()=>{
             <p>{singleReview.review_body}</p>
             <img src={singleReview.review_img_url} alt='Not found' ></img>
                             <p>Votes : {singleReview.votes}</p>
-                            <AddReviewVotes votes={votes} setVotes={setVotes}/>
+                        <AddReviewVotes  review_id={review_id} setSingleReview={setSingleReview}/>
             <p>{(comments.length === 0) ?
             'No comments' :
             'Comments'}</p>
