@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {voteForReview} from '../utils/api.js'
 
 
@@ -6,14 +7,24 @@ import {voteForReview} from '../utils/api.js'
 
 
 function AddReviewVotes({ review_id, setSingleReview}){
+    const [isVotingErr, setIsVotingErr] = useState(false)
     const onClick = ()=>{
             setSingleReview((currentReview)=>{
                 return {...currentReview, votes:currentReview.votes + 1}
             })
-        voteForReview(review_id).catch()
+        voteForReview(review_id).catch(()=>{
+            setSingleReview((currentReview)=>{
+                return {...currentReview, votes:currentReview.votes}
+            })
+            setIsVotingErr(true)
+        })
     }
         return (
-            <button onClick={onClick}>Vote here!</button>)
+            <main>
+            <button onClick={onClick}>Vote here!</button>
+            {isVotingErr && <p>Vote not uploaded</p>}
+            </main>
+            )
     }
     
     
